@@ -1,6 +1,6 @@
-# Ruby Exercises
+# RubyThis Exercises
 
-This is a collection of exercises to practice various aspects of Ruby.
+ is a collection of exercises to practice various aspects of Ruby.
 
 Practicing in this manner (small, bite-sized problems that you can do repeatedly) is a _fantastic_ way to solidify programming concepts.
 
