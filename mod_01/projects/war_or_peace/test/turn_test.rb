@@ -33,13 +33,20 @@ class TurnTest < Minitest::Test
     @deck2 = Deck.new([@card3])
     @player1 = Player.new('Joe', @deck1)
     @player2 = Player.new('Scott', @deck2)
-
     @turn = Turn.new(@player1, @player2)
 
     assert_equal :basic, @turn.type
   end
 
-  def test_type_is_war; end
+  def test_type_is_war
+    @deck1 = Deck.new([@card1])
+    @deck2 = Deck.new([@card4])
+    @player1 = Player.new('Joe', @deck1)
+    @player2 = Player.new('Scott', @deck2)
+    @turn = Turn.new(@player1, @player2)
+
+    assert_equal :war, @turn.type
+  end
 
   def test_type_is_mutually_assured_destruction; end
 end

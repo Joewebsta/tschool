@@ -12,6 +12,12 @@ class Turn
     player1_card = player1.deck.rank_of_card_at(0)
     player2_card = player2.deck.rank_of_card_at(0)
 
-    :basic if player1_card != player2_card
+    if player1_card != player2_card
+      type = :basic
+    elsif player1_card == player2_card
+      type = :war
+    end
+
+    type
   end
 end
