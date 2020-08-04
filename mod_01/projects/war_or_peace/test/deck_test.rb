@@ -22,11 +22,11 @@ class DeckTest < Minitest::Test
   end
 
   def test_it_returns_rank_of_card_at_index_0
-    assert_equal @card1, @deck.rank_of_card_at(0)
+    assert_equal @card1.rank, @deck.rank_of_card_at(0)
   end
 
   def test_it_returns_rank_of_card_at_index_2
-    assert_equal @card3, @deck.rank_of_card_at(2)
+    assert_equal @card3.rank, @deck.rank_of_card_at(2)
   end
 
   def test_it_returns_high_ranking_cards
