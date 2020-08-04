@@ -17,25 +17,21 @@ class PlayerTest < Minitest::Test
   end
 
   def test_it_exists
-    skip
     assert_instance_of Player, @player
   end
 
   def test_it_has_a_name
-    skip
     assert_equal 'Joe', @player.name
   end
 
   def test_it_has_not_lost_game
-    skip
-    refute @player.has_lost?
+    refute @player.lost?
   end
 
   def test_it_lost_game
-    skip
     @player.deck.remove_card
     @player.deck.remove_card
     @player.deck.remove_card
-    assert @player.has_lost?
+    assert @player.lost?
   end
 end
