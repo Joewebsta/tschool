@@ -144,6 +144,21 @@ class TurnTest < Minitest::Test
     assert_equal [@card5], @player1.deck.cards
     assert_equal [@card6], @player2.deck.cards
   end
+
+  def test_it_sends_spoils_to_p1_winner_when_type_is_basic
+    @deck1 = Deck.new([@card1, @card2, @card5, @card8])
+    @deck2 = Deck.new([@card3, @card4, @card6, @card7])
+    @player1 = Player.new('Joe', @deck1)
+    @player2 = Player.new('Scott', @deck2)
+    @turn = Turn.new(@player1, @player2)
+
+    p1_winner_deck = [@card2, @card5, @card8, @card1, @card3]
+    p2_loser_deck = [@card4, @card6, @card7]
+
+    assert_equal p1_winner_deck, @player1.deck.cards
+    assert_equal p2_loser_deck, @player2.deck.cards
+    assert_equal [], @turn.spoils_of_war
+  end
 end
 
 ## PLAYER 1
