@@ -42,4 +42,12 @@ class Turn
       3.times { player2.deck.remove_card }
     end
   end
+
+  def award_spoils
+    spoils_of_war.each do |card|
+      winner.deck.add_card(card)
+    end
+
+    spoils_of_war.clear
+  end
 end
