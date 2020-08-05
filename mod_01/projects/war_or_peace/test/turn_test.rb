@@ -119,6 +119,18 @@ class TurnTest < Minitest::Test
 
     assert_equal spoils, @turn.spoils_of_war
   end
+
+  def test_cards_sent_to_spoils_pile_when_type_is_war
+    @deck1 = Deck.new([@card1, @card2, @card5, @card8])
+    @deck2 = Deck.new([@card4, @card3, @card6, @card7])
+    @player1 = Player.new('Joe', @deck1)
+    @player2 = Player.new('Scott', @deck2)
+    @turn = Turn.new(@player1, @player2)
+    spoils = [@card1, @card2, @card5, @card4, @card3, @card6]
+    @turn.pile_cards
+
+    assert_equal spoils, @turn.spoils_of_war
+  end
 end
 
 ## PLAYER 1
