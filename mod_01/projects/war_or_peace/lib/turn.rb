@@ -22,5 +22,6 @@ class Turn
   def winner
     return @p1_card1_rank > @p2_card1_rank ? player1 : player2 if type == :basic
     return @p1_card3_rank > @p2_card3_rank ? player1 : player2 if type == :war
+    return 'No Winner' if type == :mutually_assured_destruction
   end
 end
