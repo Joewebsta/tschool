@@ -97,6 +97,16 @@ class TurnTest < Minitest::Test
 
     assert_equal @player2, @turn.winner
   end
+
+  def test_player1_is_winner_when_type_is_MAD
+    @deck1 = Deck.new([@card1, @card2, @card8, @card5])
+    @deck2 = Deck.new([@card4, @card3, @card7, @card6])
+    @player1 = Player.new('Joe', @deck1)
+    @player2 = Player.new('Scott', @deck2)
+    @turn = Turn.new(@player1, @player2)
+
+    assert_equal 'No Winner', @turn.winner
+  end
 end
 
 ## PLAYER 1
