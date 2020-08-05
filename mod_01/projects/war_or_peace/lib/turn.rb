@@ -6,6 +6,7 @@ class Turn
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
+    @spoils_of_war = []
 
     @p1_card1_rank = @player1.deck.rank_of_card_at(0)
     @p1_card3_rank = @player1.deck.rank_of_card_at(2)
@@ -23,5 +24,9 @@ class Turn
     return @p1_card1_rank > @p2_card1_rank ? player1 : player2 if type == :basic
     return @p1_card3_rank > @p2_card3_rank ? player1 : player2 if type == :war
     return 'No Winner' if type == :mutually_assured_destruction
+  end
+
+  def pile_cards
+    spoils_of_war << player1.deck.remove_card << player2.deck.remove_card if type == :basic
   end
 end

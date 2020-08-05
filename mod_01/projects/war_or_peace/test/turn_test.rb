@@ -115,8 +115,9 @@ class TurnTest < Minitest::Test
     @player2 = Player.new('Scott', @deck2)
     @turn = Turn.new(@player1, @player2)
     spoils = [@card1, @card3]
+    @turn.pile_cards
 
-    assert_equal spoils, @turn.pile_cards
+    assert_equal spoils, @turn.spoils_of_war
   end
 end
 
