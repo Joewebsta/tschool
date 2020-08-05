@@ -20,6 +20,12 @@ sorted_data = data.sort do |person1, person2|
   person1[1] <=> person2[1]
 end
 
-sorted_data.each do |person|
-  puts "#{person[0]} #{person[1]}"
+# sorted_data.each do |person|
+#   puts "#{person[0]} #{person[1]}"
+# end
+
+data_hash = sorted_data.each_with_object({}) do |curr, acc|
+  acc[curr[1]] ? acc[curr[1]] << curr[0] : acc[curr[1]] = [curr[0]]
 end
+
+p data_hash
