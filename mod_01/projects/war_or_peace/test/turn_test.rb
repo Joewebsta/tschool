@@ -29,8 +29,8 @@ class TurnTest < Minitest::Test
   end
 
   def test_type_is_basic
-    @deck1 = Deck.new([@card1])
-    @deck2 = Deck.new([@card3])
+    @deck1 = Deck.new([@card1, @card2, @card5, @card8])
+    @deck2 = Deck.new([@card3, @card4, @card6, @card7])
     @player1 = Player.new('Joe', @deck1)
     @player2 = Player.new('Scott', @deck2)
     @turn = Turn.new(@player1, @player2)
@@ -39,8 +39,8 @@ class TurnTest < Minitest::Test
   end
 
   def test_type_is_war
-    @deck1 = Deck.new([@card1])
-    @deck2 = Deck.new([@card4])
+    @deck1 = Deck.new([@card1, @card2, @card5, @card8])
+    @deck2 = Deck.new([@card4, @card3, @card6, @card7])
     @player1 = Player.new('Joe', @deck1)
     @player2 = Player.new('Scott', @deck2)
     @turn = Turn.new(@player1, @player2)
