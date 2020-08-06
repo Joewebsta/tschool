@@ -1,6 +1,7 @@
 require './lib/card'
 require './lib/deck'
 require './lib/player'
+require './lib/game'
 
 def create_cards
   [
@@ -47,7 +48,8 @@ def collect_player_input
     input = gets.chomp.downcase
 
     if input == 'go'
-      Game.new(create_players).start
+      game = Game.new(create_players)
+      game.start
       break
     else
       puts "Type 'GO' to start the game!"
