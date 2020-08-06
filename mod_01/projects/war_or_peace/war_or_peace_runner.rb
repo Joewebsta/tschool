@@ -1,5 +1,6 @@
 require './lib/card'
 require './lib/deck'
+require './lib/player'
 
 def create_cards
   [
@@ -21,11 +22,17 @@ end
 
 def create_decks
   shuffled_cards = create_cards.shuffle
-  half_shuffled_cards = shuffled_cards.length / 2
-  deck1 = shuffled_cards.first(half_shuffled_cards).length
-  deck2 = shuffled_cards.last(half_shuffled_cards).length
+  deck1 = Deck.new(shuffled_cards.first(6))
+  deck2 = Deck.new(shuffled_cards.last(7))
   [deck1, deck2]
+end
+
+def create_players
+  decks = create_decks
+  player1 = Player.new('Joe', decks[0])
+  player2 = Player.new('Brendan', decks[1])
 end
 
 create_cards
 create_decks
+create_players
