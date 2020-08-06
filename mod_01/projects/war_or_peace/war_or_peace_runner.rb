@@ -31,8 +31,32 @@ def create_players
   decks = create_decks
   player1 = Player.new('Joe', decks[0])
   player2 = Player.new('Brendan', decks[1])
+  [player1, player2]
+end
+
+def display_intro
+  players = create_players
+  puts 'Welcome to War! (or Peace) This game will be played with 52 cards.'
+  puts "The players today are #{players[0].name} and #{players[1].name}."
+  puts "Type 'GO' to start the game!"
+  puts '------------------------------------------------------------------'
+end
+
+def collect_player_input
+  loop do
+    input = gets.chomp.downcase
+
+    if input == 'go'
+      Game.new(create_players).start
+      break
+    else
+      puts "Type 'GO' to start the game!"
+    end
+  end
 end
 
 create_cards
 create_decks
 create_players
+display_intro
+collect_player_input
