@@ -1,5 +1,4 @@
 class Medusa
-
   attr_reader :name
   attr_accessor :statues
 
@@ -10,17 +9,11 @@ class Medusa
 
   def stare(x)
     x.stone = true
-    @statues = x
+    @statues << x
   end
-
-  def statues
-    @statues
-  end
-
 end
 
 class Person
-
   attr_reader :name
   attr_accessor :stone
 
@@ -32,5 +25,4 @@ class Person
   def stoned?
     @stone
   end
-
 end
