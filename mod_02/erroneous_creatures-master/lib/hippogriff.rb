@@ -1,12 +1,11 @@
 class Hippogriff
-
   attr_reader :name, :color
   attr_accessor :moonrocks
 
   def initialize(name, color)
     @name = name
     @color = color
-    moonrocks = []
+    @moonrocks = []
   end
 
   def fly(rock)
@@ -17,11 +16,9 @@ class Hippogriff
   def sack
     @moonrocks.to_h
   end
-
 end
 
 class Moonstone
-
   attr_reader :color
   attr_accessor :magicalness
 
@@ -33,5 +30,4 @@ class Moonstone
   def magic?
     @magicalness
   end
-
 end
