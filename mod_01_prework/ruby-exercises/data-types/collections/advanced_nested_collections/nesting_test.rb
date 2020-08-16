@@ -14,131 +14,111 @@ require 'minitest/pride'
 # If you spot an error or want to make this exercise better, please let us know!
 
 class NestedTest < MiniTest::Test
-
   def test_list_of_olive_garden_employess
-    skip
-    #^^^ Un-Skip each test
+    # ^^^ Un-Skip each test
     #=======================
     # EXAMPLE
     employees = stores[:olive_garden][:employees]
     #=======================
-    assert_equal ["Jeff", "Zach", "Samantha"], employees
+    assert_equal %w[Jeff Zach Samantha], employees
   end
 
   def test_pancake_ingredients
-    skip
     #=======================
-    # pancake_ingredients = <your code here>
+    pancake_ingredients = stores[:dennys][:dishes][0][:ingredients]
     #=======================
-    assert_equal ["Flour", "Eggs", "Milk", "Syrup"], pancake_ingredients
+    assert_equal %w[Flour Eggs Milk Syrup], pancake_ingredients
   end
 
   def test_rissotto_price
-    skip
     #=======================
-    # risotto_price = <your code here>
+    risotto_price = stores[:olive_garden][:dishes][0][:price]
     #=======================
     assert_equal 12, risotto_price
   end
 
   def test_big_mac_ingredients
-    skip
     #=======================
-    # big_mac_ingredients = <your code here>
+    big_mac_ingredients = stores[:macdonalds][:dishes][0][:ingredients]
     #=======================
-    assert_equal ['Bun','Hamburger','Ketchup','pickles'], big_mac_ingredients
+    assert_equal %w[Bun Hamburger Ketchup pickles], big_mac_ingredients
   end
 
   def test_list_of_restaurants
-    skip
     #=======================
-    # store_names = <your code here>
+    store_names = stores.keys
     #=======================
-    assert_equal [:olive_garden, :dennys, :macdonalds], store_names
+    assert_equal %i[olive_garden dennys macdonalds], store_names
   end
 
   def test_list_of_dishes_names_for_olive_garden
-    skip
     #=======================
-    # dishes_names = <your code here>
+    dishes_names = stores[:olive_garden][:dishes].map { |dish| dish[:name] }
     #=======================
-    assert_equal ['Risotto', 'Steak'], dishes_names
+    assert_equal %w[Risotto Steak], dishes_names
   end
 
   def test_list_of_employees_across_all_restaurants
-    skip
     #=======================
-    # employee_names = <your code here>
+    employee_names = stores.collect { |_key, val| val[:employees] }.flatten
     #=======================
-    assert_equal ["Jeff","Zach","Samantha","Bob","Sue","James","Alvin","Simon","Theodore"], employee_names
+    assert_equal %w[Jeff Zach Samantha Bob Sue James Alvin Simon Theodore], employee_names
   end
 
   def test_list_of_all_ingredients_across_all_restaurants
-    skip
     #=======================
-    # ingredients = <your code here>
+    dishes = stores.collect { |_key, val| val[:dishes] }
+    ingredients = dishes.flatten.collect { |dish| dish[:ingredients] }.flatten
     #=======================
-    assert_equal ["Rice",
-                  "Cheese",
-                  "Butter",
-                  "Beef",
-                  "Garlic",
-                  "Flour",
-                  "Eggs",
-                  "Milk",
-                  "Syrup",
-                  "Flour",
-                  "Eggs",
-                  "Syrup",
-                  "Bun",
-                  "Hamburger",
-                  "Ketchup",
-                  "pickles",
-                  "Potatoes",
-                  "Salt"], ingredients
+    assert_equal %w[Rice Cheese Butter Beef Garlic Flour Eggs Milk Syrup Flour Eggs Syrup Bun Hamburger Ketchup pickles Potatoes Salt], ingredients
   end
 
   def test_full_menu_price_for_olive_garden
-    skip
     #=======================
-    # full_menu_price = <your code here>
+    dishes = stores[:olive_garden][:dishes]
+
+    full_menu_price = dishes.reduce(0) do |total, dish|
+      total += dish[:price]
+      total
+    end
     #=======================
     assert_equal 27, full_menu_price
   end
 
   def test_full_menu_for_olive_garden
-    skip
     #=======================
-    # olive_garden_menu = <your code here>
+    dishes = stores[:olive_garden][:dishes]
+
+    olive_garden_menu = dishes.each_with_object({}) do |dish, menu|
+      menu[dish[:name]] = dish
+    end
     #=======================
-    expected = ({"Risotto"=>{:name=>"Risotto", :ingredients=>["Rice", "Cheese", "Butter"], :price=>12},
-                  "Steak"=>{:name=>"Steak", :ingredients=>["Beef", "Garlic"], :price=>15}})
+    expected = { 'Risotto' => { name: 'Risotto', ingredients: %w[Rice Cheese Butter], price: 12 },
+                 'Steak' => { name: 'Steak', ingredients: %w[Beef Garlic], price: 15 } }
     assert_equal expected, olive_garden_menu
   end
 
   def test_menu_accross_all_restaurants
-     skip
     #=======================
-    #  full_menu = <your code here>
+    dishes = stores.collect { |_key, val| val[:dishes] }
+    full_menu = dishes.flatten.each_with_object({}) { |dish, menu| menu[dish[:name]] = dish }
     #=======================
-    expected = ({"Risotto"=>
-                      {:name=>"Risotto", :ingredients=>["Rice", "Cheese", "Butter"], :price=>12},
-                "Steak"=>
-                    {:name=>"Steak", :ingredients=>["Beef", "Garlic"], :price=>15},
-                "Pancakes"=>
-                     {:name=>"Pancakes",
-                      :ingredients=>["Flour", "Eggs", "Milk", "Syrup"],
-                      :price=>10},
-                "Waffles"=>
-                      {:name=>"Waffles", :ingredients=>["Flour", "Eggs", "Syrup"], :price=>7},
-                "Big Mac"=>
-                    {:name=>"Big Mac",
-                    :ingredients=>["Bun", "Hamburger", "Ketchup", "pickles"],
-                    :price=>5},
-                "Fries"=>
-                    {:name=>"Fries", :ingredients=>["Potatoes", "Salt"], :price=>2}
-                  })
+    expected = { 'Risotto' =>
+                      { name: 'Risotto', ingredients: %w[Rice Cheese Butter], price: 12 },
+                 'Steak' =>
+                    { name: 'Steak', ingredients: %w[Beef Garlic], price: 15 },
+                 'Pancakes' =>
+                     { name: 'Pancakes',
+                       ingredients: %w[Flour Eggs Milk Syrup],
+                       price: 10 },
+                 'Waffles' =>
+                      { name: 'Waffles', ingredients: %w[Flour Eggs Syrup], price: 7 },
+                 'Big Mac' =>
+                    { name: 'Big Mac',
+                      ingredients: %w[Bun Hamburger Ketchup pickles],
+                      price: 5 },
+                 'Fries' =>
+                    { name: 'Fries', ingredients: %w[Potatoes Salt], price: 2 } }
     assert_equal expected, full_menu
   end
-
 end
