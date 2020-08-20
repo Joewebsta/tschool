@@ -10,18 +10,18 @@ class Ogre
   end
 
   def encounter(human)
-    human.encounter_counter += 1
     self.encounter_counter += 1
+    human.increment_encounter_counter
     swing_at(human) if human.notices_ogre?
-    human.knocked_out = true if (swings % 2).zero?
   end
 
-  def swing_at(_target)
+  def swing_at(human)
     self.swings += 1
+    human.get_knocked_out if (swings % 2).zero?
   end
 
   def apologize(human)
-    human.knocked_out = false
+    human.become_conscious
   end
 end
 
@@ -36,11 +36,23 @@ class Human
     @knocked_out = false
   end
 
+  def increment_encounter_counter
+    self.encounter_counter += 1
+  end
+
   def notices_ogre?
-    (encounter_counter % 3).zero? ? true : false
+    (encounter_counter % 3).zero?
   end
 
   def knocked_out?
     knocked_out
+  end
+
+  def get_knocked_out
+    self.knocked_out = true
+  end
+
+  def become_conscious
+    self.knocked_out = false
   end
 end
